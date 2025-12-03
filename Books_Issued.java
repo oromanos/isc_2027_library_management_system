@@ -1,3 +1,4 @@
+import java.util.*;
 class Books_Issued{
 
     private int id; //record id
@@ -25,6 +26,8 @@ class Books_Issued{
         this.memberId=memberId;
         this.issuedOn=issuedOn;
         this.issuedBy=issuedBy;
+        returnedOn="";
+        returnedBy=0;
         
     }
     public void bookReturned(String returnDate , int staffId){
@@ -53,6 +56,21 @@ public String toString() {
             ", returnedBy=" + returnedBy +
             '}';
 }
+public static Books_Issued fromRecord(String line) {
+
+    StringTokenizer st = new StringTokenizer(line, "|");
+
+    int id = Integer.parseInt(st.nextToken());
+    int bookId = Integer.parseInt(st.nextToken());
+    int memberId = Integer.parseInt(st.nextToken());
+    String issuedOn = st.nextToken();
+    int issuedBy = Integer.parseInt(st.nextToken());
+    String returnedOn = st.nextToken();
+    int returnedBy = Integer.parseInt(st.nextToken());
+
+    return new Books_Issued(id, bookId, memberId, issuedOn, issuedBy, returnedOn, returnedBy);
+}
+
 
 
 
