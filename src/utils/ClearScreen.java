@@ -1,4 +1,4 @@
-package scr.utils;
+package src.utils;
 
 public class ClearScreen {
     public void clearScreen() {

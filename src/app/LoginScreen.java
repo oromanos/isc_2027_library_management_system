@@ -1,5 +1,9 @@
+package src.app;
+
 import java.io.*;
 import java.util.*;
+import src.utils.ClearScreen;
+import src.utils.Encrypter;
 
 class LoginScreen {
 

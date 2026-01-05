@@ -1,4 +1,4 @@
-package scr.app;
+package src.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
