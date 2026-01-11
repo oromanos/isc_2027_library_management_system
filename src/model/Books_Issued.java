@@ -2,7 +2,7 @@ package src.model;
 
 import java.util.*;
 
-class Books_Issued {
+class BooksIssued {
 
     private int id; // record id
     private int bookId;
@@ -14,7 +14,7 @@ class Books_Issued {
     private String returnedOn; // date if not returned yet ""
     private int returnedBy; // staff id
 
-    Books_Issued(int id, int bookId, int memberId, String issuedOn, int issuedBy, String returnedOn, int returnedBy) {
+    BooksIssued(int id, int bookId, int memberId, String issuedOn, int issuedBy, String returnedOn, int returnedBy) {
         this.id = id;
         this.bookId = bookId;
         this.memberId = memberId;
@@ -24,7 +24,7 @@ class Books_Issued {
         this.returnedBy = returnedBy;
     }
 
-    Books_Issued(int id, int bookId, int memberId, String issuedOn, int issuedBy) {// when book is not returned yet
+    BooksIssued(int id, int bookId, int memberId, String issuedOn, int issuedBy) {// when book is not returned yet
         this.id = id;
         this.bookId = bookId;
         this.memberId = memberId;
@@ -64,7 +64,7 @@ class Books_Issued {
                 '}';
     }
 
-    public static Books_Issued fromRecord(String line) {
+    public static BooksIssued fromRecord(String line) {
 
         StringTokenizer st = new StringTokenizer(line, "#");
 
@@ -76,7 +76,7 @@ class Books_Issued {
         String returnedOn = st.nextToken();
         int returnedBy = Integer.parseInt(st.nextToken());
 
-        return new Books_Issued(id, bookId, memberId, issuedOn, issuedBy, returnedOn, returnedBy);
+        return new BooksIssued(id, bookId, memberId, issuedOn, issuedBy, returnedOn, returnedBy);
 
     }
 }

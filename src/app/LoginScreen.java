@@ -2,7 +2,7 @@ package src.app;
 
 import java.io.*;
 import java.util.*;
-import src.utils.ClearScreen;
+import static src.utils.ClearScreen.clearScreen;
 import src.utils.Encrypter;
 
 class LoginScreen {
@@ -12,8 +12,8 @@ class LoginScreen {
         String id, password, fileline;
         boolean flag = false;
         Encrypter en = new Encrypter();
-        ClearScreen cls = new ClearScreen();
-        String fileName = "login_info.txt";
+        // ClearScreen cls = new ClearScreen();
+        String fileName = "src/database/login_info.txt";
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter ID :");
         id = sc.nextLine();
@@ -42,13 +42,24 @@ class LoginScreen {
 
                 String email = fileline.substring(0, firstPipe);
                 String pass = fileline.substring(firstPipe + 1, secondPipe);
-                String accType = fileline.substring(secondPipe + 1);
+                String accountType = fileline.substring(secondPipe + 1);
+                br.close();
 
                 if (email.equals(id)) {
                     flag = true;
                     if (pass.equals(en.encryptString(password))) {
                         System.out.println("Login complete");
-                        cls.clearScreen();
+                        clearScreen();
+                        if (accountType.equals("member")) {
+
+                            MemberScreen ms = new MemberScreen();
+                            ms.member();
+
+                        } else if (accountType.equals("Staff")) {
+                            AdminScreen as = new AdminScreen();
+                            as.admin(accountType);
+
+                        }
 
                     } else {
                         System.out.println("invalid password");

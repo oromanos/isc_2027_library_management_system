@@ -21,12 +21,13 @@ public class Encrypter {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter string to be hashed");
         String pass = sc.nextLine();
+
         Encrypter en = new Encrypter();
         try {
             System.out.println(en.encryptString(pass));
-        } catch (Exception e) {
+        } catch (NoSuchAlgorithmException e) {
             System.out.println("Error:" + e.getMessage());
         }
-
     }
+
 }

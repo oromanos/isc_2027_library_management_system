@@ -1,7 +1,7 @@
 package src.utils;
 
 public class ClearScreen {
-    public void clearScreen() {
+    public static void clearScreen() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
