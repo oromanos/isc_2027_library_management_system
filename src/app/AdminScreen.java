@@ -1,16 +1,28 @@
 package src.app;
 
+import src.model.UserInfo;
+
 public class AdminScreen {
 
-  boolean StaffFlag;
+  private boolean staffFlag;
 
-  public void admin(String accountType) {
-    if (accountType.equals("staff")) {
-      System.out.println("Staff screen");
-      StaffFlag = true;
-    } else if (accountType.equals("admin")) {
-      System.out.println("Admin Screen");
-      StaffFlag = false;
+  private UserInfo user;
+
+  public AdminScreen(UserInfo user) {
+    this.user = user;
+  }
+
+  public void admin() {
+    if (user.getAccountType().equalsIgnoreCase("staff")) {
+      staffFlag = true;
+    } else {
+      staffFlag = false;
     }
+  }
+
+  public void show() {
+    System.out.println("ACCOUNT TYPE : " + user.getAccountType());
+    System.out.println("Username : " + user.getName());
+    System.out.println("Email : " + user.getEmail());
   }
 }

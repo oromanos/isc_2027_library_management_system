@@ -1,13 +1,13 @@
 package src.model;
 
-public class Member {
+public class UserInfo {
 
   private String name;
   private String email;
   private String password;
   private String accountType;
 
-  public Member(String name, String email, String password, String accountType) {
+  public UserInfo(String name, String email, String password, String accountType) {
     this.name = name;
     this.email = email;
     this.password = password;

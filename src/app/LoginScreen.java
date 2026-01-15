@@ -3,7 +3,7 @@ package src.app;
 import static src.utils.ClearScreen.clearScreen;
 
 import java.util.Scanner;
-import src.model.Member;
+import src.model.UserInfo;
 import src.utils.Encrypter;
 import src.utils.InformationExtractor;
 
@@ -23,23 +23,22 @@ public class LoginScreen {
 
     try {
 
-      Member member = ie.getInfo("src/database/login_info.txt", username);
+      UserInfo info = ie.getInfo("src/database/login_info.txt", username);
 
-      // Check password
-      if (member.getPassword().equals(en.encryptString(password))) {
+      // check hashed pass
+      if (info.getPassword().equals(en.encryptString(password))) {
 
         System.out.println("Login successful!");
         clearScreen();
+        // check acc type
+        if (info.getAccountType().equalsIgnoreCase("member")) {
+          MemberScreen ms = new MemberScreen(info);
+          ms.show();
 
-        // Redirect based on account type
-        if (member.getAccountType().equalsIgnoreCase("member")) {
-          MemberScreen ms = new MemberScreen();
-          ms.member();
-
-        } else if (member.getAccountType().equalsIgnoreCase("staff")
-            || member.getAccountType().equalsIgnoreCase("admin")) {
-          AdminScreen as = new AdminScreen();
-          as.admin(member.getAccountType());
+        } else if (info.getAccountType().equalsIgnoreCase("staff")
+            || info.getAccountType().equalsIgnoreCase("admin")) {
+          AdminScreen as = new AdminScreen(info);
+          as.show();
 
         } else {
           System.out.println("Unknown account type!");

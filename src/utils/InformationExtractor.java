@@ -2,11 +2,11 @@ package src.utils;
 
 import java.io.*;
 import java.util.StringTokenizer;
-import src.model.Member;
+import src.model.UserInfo;
 
 public class InformationExtractor {
 
-  public Member getInfo(String filename, String username) throws Exception {
+  public UserInfo getInfo(String filename, String username) throws Exception {
 
     BufferedReader br = new BufferedReader(new FileReader(filename));
     String fileLine;
@@ -21,7 +21,7 @@ public class InformationExtractor {
 
       if (username.equals(name)) {
         br.close();
-        return new Member(name, email, password, accountType);
+        return new UserInfo(name, email, password, accountType);
       }
     }
 
