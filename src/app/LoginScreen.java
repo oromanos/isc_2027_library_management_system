@@ -1,81 +1,56 @@
 package src.app;
 
-import java.io.*;
-import java.util.*;
 import static src.utils.ClearScreen.clearScreen;
+
+import java.util.Scanner;
+import src.model.Member;
 import src.utils.Encrypter;
+import src.utils.InformationExtractor;
 
-class LoginScreen {
+public class LoginScreen {
 
-    public static void main(String args[]) {
+  public static void main(String[] args) {
 
-        String id, password, fileline;
-        boolean flag = false;
-        Encrypter en = new Encrypter();
-        // ClearScreen cls = new ClearScreen();
-        String fileName = "src/database/login_info.txt";
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter ID :");
-        id = sc.nextLine();
-        System.out.print("Enter Password :");
-        password = sc.nextLine();
+    Scanner sc = new Scanner(System.in);
+    Encrypter en = new Encrypter();
+    InformationExtractor ie = new InformationExtractor();
 
-        try {
+    System.out.print("Enter Username: ");
+    String username = sc.nextLine();
 
-            FileReader fr = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fr);
-            FileReader frcount = new FileReader(fileName);
-            BufferedReader brcount = new BufferedReader(frcount);
-            int line = 0;
-            while (brcount.readLine() != null) {
-                line++;
-            }
-            brcount.close();
-            if (line == 0) {
-                System.out.println("no records found");
-            }
-            for (int i = 0; i < line; i++) {
-                fileline = br.readLine();
+    System.out.print("Enter Password: ");
+    String password = sc.nextLine();
 
-                int firstPipe = fileline.indexOf('#');
-                int secondPipe = fileline.indexOf('#', firstPipe + 1);
+    try {
 
-                String email = fileline.substring(0, firstPipe);
-                String pass = fileline.substring(firstPipe + 1, secondPipe);
-                String accountType = fileline.substring(secondPipe + 1);
-                br.close();
+      Member member = ie.getInfo("src/database/login_info.txt", username);
 
-                if (email.equals(id)) {
-                    flag = true;
-                    if (pass.equals(en.encryptString(password))) {
-                        System.out.println("Login complete");
-                        clearScreen();
-                        if (accountType.equals("member")) {
+      // Check password
+      if (member.getPassword().equals(en.encryptString(password))) {
 
-                            MemberScreen ms = new MemberScreen();
-                            ms.member();
+        System.out.println("Login successful!");
+        clearScreen();
 
-                        } else if (accountType.equals("Staff")) {
-                            AdminScreen as = new AdminScreen();
-                            as.admin(accountType);
+        // Redirect based on account type
+        if (member.getAccountType().equalsIgnoreCase("member")) {
+          MemberScreen ms = new MemberScreen();
+          ms.member();
 
-                        }
+        } else if (member.getAccountType().equalsIgnoreCase("staff")
+            || member.getAccountType().equalsIgnoreCase("admin")) {
+          AdminScreen as = new AdminScreen();
+          as.admin(member.getAccountType());
 
-                    } else {
-                        System.out.println("invalid password");
-                    }
-                }
-
-            }
-            if (!flag) {
-                System.out.println("Email not found!");
-
-            }
-
+        } else {
+          System.out.println("Unknown account type!");
         }
 
-        catch (Exception e) {
-            System.out.println("Error" + e.getMessage());
-        }
+      } else {
+        System.out.println("Invalid password!");
+      }
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
     }
+  }
 }

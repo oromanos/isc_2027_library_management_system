@@ -6,28 +6,27 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class Encrypter {
-    public String encryptString(String input) throws NoSuchAlgorithmException {
+  public String encryptString(String input) throws NoSuchAlgorithmException {
 
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
+    MessageDigest md = MessageDigest.getInstance("SHA-256");
 
-        byte[] messageDigest = md.digest(input.getBytes());
+    byte[] messageDigest = md.digest(input.getBytes());
 
-        BigInteger bigInt = new BigInteger(1, messageDigest);
+    BigInteger bigInt = new BigInteger(1, messageDigest);
 
-        return bigInt.toString(16);
+    return bigInt.toString(16);
+  }
+
+  public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter string to be hashed");
+    String pass = sc.nextLine();
+
+    Encrypter en = new Encrypter();
+    try {
+      System.out.println(en.encryptString(pass));
+    } catch (NoSuchAlgorithmException e) {
+      System.out.println("Error:" + e.getMessage());
     }
-
-    public static void main(String args[]) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter string to be hashed");
-        String pass = sc.nextLine();
-
-        Encrypter en = new Encrypter();
-        try {
-            System.out.println(en.encryptString(pass));
-        } catch (NoSuchAlgorithmException e) {
-            System.out.println("Error:" + e.getMessage());
-        }
-    }
-
+  }
 }
