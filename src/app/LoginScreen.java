@@ -45,7 +45,7 @@ public class LoginScreen {
         }
 
       } else {
-        System.out.println("Invalid password!");
+        System.out.println("Invalid Credentials!");
       }
 
     } catch (Exception e) {
