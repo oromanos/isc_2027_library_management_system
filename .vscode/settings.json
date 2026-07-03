@@ -1,0 +1,11 @@
+{
+    "editor.trimWhitespaceOnDelete": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    "editor.fontSize": 16,
+    "editor.defaultFormatter": "josevseb.google-java-format-for-vs-code",
+    "java.project.sourcePaths": [
+        ""
+    ]
+}

@@ -1,0 +1,3 @@
+admin class
+will contain all the informations related to admin class stafff class is just an sub class of admin class
+will contain stuff like get info etc file/ data base should include name unsername email password account type

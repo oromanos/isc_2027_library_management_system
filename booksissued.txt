@@ -1,0 +1,20 @@
+bookid bood id 
+memberid member id 
+issuedon 
+issuedby user id
+returnedby urser id 
+
+full constructor 
+
+consctructor when not retured/ new issue 
+
+marker if returned 
+
+also make a simple string to send to txt file 
+front text to string 
+
+check if book is returned or not 
+
+info print one liner 
+
+id|idk|
